@@ -1,0 +1,21 @@
+<svg width="196" height="130" viewBox="0 0 196 130" fill="none" xmlns="http://www.w3.org/2000/svg" id="swot-gauge-svg">
+<path id="gauge-seg-1" d="M29 106H13" stroke="#6CBE45" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-2" d="M30.048 94.0182L14.291 91.2402" stroke="#73C144" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-3" d="M33.161 82.4007L18.126 76.9277" stroke="#79C443" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-4" d="M38.2439 71.5L24.3879 63.5" stroke="#80C743" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-5" d="M45.257 61.285L33 51" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-6" d="M53.648 53.1427L43.363 40.8857" stroke="#8DCD41" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-7" d="M63.5 46.2437L55.5 32.3877" stroke="#94D040" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-8" d="M74.401 41.161L68.928 26.126" stroke="#9BD340" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-9" d="M86.018 38.048L83.24 22.291" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-10" d="M98 37V21" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-11" d="M109.982 38.048L112.76 22.291" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-12" d="M121.599 41.161L127.072 26.126" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-13" d="M132.5 46.2437L140.5 32.3877" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-14" d="M142.352 53.1427L152.637 40.8857" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-15" d="M150.857 61.6483L163.114 51.3633" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-16" d="M157.756 71.5L171.612 63.5" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-17" d="M162.839 82.4007L177.874 76.9277" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-18" d="M165.952 94.0182L181.709 91.2402" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+<path id="gauge-seg-19" d="M167 106H183" stroke="#87CA42" stroke-width="8" stroke-linecap="round"/>
+</svg>
