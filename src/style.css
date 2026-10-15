@@ -231,36 +231,36 @@ button {
    -------------------------------------------------------------------------- */
 .site-header {
   position: fixed;
-  top: 24px;
+  top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  display: flex;
-  justify-content: center;
-  padding: 0 var(--page-padding);
+  padding: 24px var(--page-padding);
   pointer-events: none;
+  transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.nav-capsule {
-  pointer-events: auto;
-  max-width: 1240px;
+.site-header.is-scrolled {
+  background: rgba(16, 38, 30, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 14px var(--page-padding);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+.header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 72px;
-  padding: 10px 20px;
-  transition: all 0.3s ease;
 }
 
-.site-header.is-scrolled .nav-capsule {
-  background: rgba(16, 38, 30, 0.88);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+.brand-logo {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
 }
 
 .brand-logo img {
@@ -269,20 +269,31 @@ button {
   object-fit: contain;
 }
 
-.nav-links {
+.nav-capsule {
+  pointer-events: auto;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  padding: 6px 10px;
+  transition: all 0.3s ease;
+}
+
+.site-header.is-scrolled .nav-capsule {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .nav-chip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius-btn);
-  padding: 8px 16px;
+  border-radius: 30px;
+  padding: 8px 18px;
   font-size: 14px;
   font-weight: 500;
   color: #FFFFFF;
@@ -291,30 +302,31 @@ button {
 }
 
 .nav-chip:hover {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.16);
 }
 
-.nav-cta {
+.header-cta-wrap {
+  pointer-events: auto;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.btn-primary-capsule {
+.btn-header-cta {
   background: #FFFFFF;
   color: var(--color-forest-dark);
   border-radius: var(--radius-btn);
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
-.btn-primary-capsule:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+.btn-header-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
 .mobile-menu-btn {
@@ -411,8 +423,8 @@ button {
 
 .hero-headline {
   font-family: var(--font-serif);
-  font-size: clamp(44px, 5.2vw, 84px);
-  line-height: 1.05;
+  font-size: clamp(36px, 4.1vw, 68px);
+  line-height: 1.06;
   color: #FFFFFF;
   font-weight: 400;
   margin-top: 16px;
@@ -723,7 +735,9 @@ button {
 }
 
 .founder-info-left {
-  padding-bottom: 70px;
+  padding-bottom: 115px;
+  position: relative;
+  z-index: 6;
 }
 
 .founder-role-tag {
@@ -769,15 +783,15 @@ button {
   align-items: flex-end;
   justify-content: center;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .founder-cutout-img {
-  height: 560px;
-  max-height: 560px;
+  height: 590px;
+  max-height: 590px;
   width: auto;
   object-fit: contain;
-  transform: translateY(-28px);
+  transform: translateY(-64px);
   transform-origin: bottom center;
   transition: all 0.3s var(--ease-out);
 }
@@ -943,14 +957,15 @@ button {
   color: #FFFFFF;
 }
 
-/* Previously At Row */
-.founder-previously-row {
-  margin-top: 64px;
-  padding-top: 24px;
+/* Previously At Strip (Below Stage on White Background) */
+.founder-previously-strip {
+  margin-top: 48px;
+  padding-top: 32px;
   border-top: 1px solid rgba(16, 38, 30, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 32px;
 }
 
 .previously-label {
@@ -959,18 +974,21 @@ button {
   letter-spacing: 0.12em;
   color: var(--color-text-dim);
   text-transform: uppercase;
+  flex-shrink: 0;
 }
 
 .previously-logos-container {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .previous-logos-img {
-  max-height: 40px;
+  max-height: 48px;
   width: auto;
   object-fit: contain;
 }
+
 
 /* --------------------------------------------------------------------------
    05 · HOW WE WORK (WHY COMPANIES CHOOSE US)
@@ -2882,41 +2900,94 @@ button {
    -------------------------------------------------------------------------- */
 @media (max-width: 1200px) {
   .hero-container {
-    grid-template-columns: 1fr 320px;
+    gap: 28px;
   }
   .hero-portal-card {
-    display: none;
+    width: 160px;
+    height: 380px;
   }
-  .founder-stage-inner {
-    grid-template-columns: 1fr 1fr;
+  .hero-cards {
+    width: 300px;
+  }
+  .founder-stage {
+    padding: 44px 32px 0;
+  }
+  .founder-cutout-img {
+    height: 500px;
+    transform: translateY(-24px);
   }
   .founder-expertise-card {
-    position: static;
-    width: 100%;
-    margin-top: 24px;
-    grid-column: span 2;
+    width: 300px;
+    padding: 20px 22px;
   }
   .founder-tri-card {
-    position: static;
-    transform: none;
-    width: 100%;
-    margin-top: 32px;
-    margin-bottom: -20px;
+    width: calc(100% - 40px);
   }
 }
 
 @media (max-width: 992px) {
-  .nav-links {
+  .nav-capsule {
     display: none;
   }
   .mobile-menu-btn {
     display: flex;
   }
   .hero-container {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+  .hero-content {
+    max-width: 100%;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-portal-card {
+    display: none;
   }
   .hero-cards {
     width: 100%;
+    max-width: 480px;
+  }
+  .founder-stage {
+    padding: 36px 20px 24px;
+    min-height: auto;
+    margin-bottom: 40px;
+  }
+  .founder-stage-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .founder-info-left {
+    padding-bottom: 24px;
+  }
+  .founder-desc {
+    margin: 0 auto;
+  }
+  .founder-cutout-img {
+    height: 380px;
+    transform: none;
+  }
+  .founder-expertise-card {
+    position: static;
+    width: 100%;
+    margin-top: 24px;
+  }
+  .founder-tri-card {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-top: 24px;
+    flex-direction: column;
+  }
+  .founder-previously-strip {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
   }
   .facts-grid {
     grid-template-columns: repeat(2, 1fr);
