@@ -23,5 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# Temporary root screenshots
+# Temporary root screenshots and references
 /*.png
+/figma-*.jpg
+/crop-*.png
+.vercel

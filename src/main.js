@@ -8,7 +8,8 @@
  * - 14 · SWOT Diagnostic Test & Countdown Gauge
  * - Header Scroll & Mobile Nav
  * - Count-up Statistics
- * - Scroll Appear Animations (IntersectionObserver & View Timeline)
+ * - Scroll Appear Animations (IntersectionObserver)
+ * - Video Modal
  */
 
 import './style.css';
@@ -50,7 +51,6 @@ function initHeader() {
       mobileBtn.classList.toggle('is-active', isOpen);
     });
 
-    // Close drawer when clicking links
     mobileDrawer.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileDrawer.classList.remove('is-open');
@@ -61,7 +61,7 @@ function initHeader() {
 }
 
 /* ==========================================================================
-   2. FOUNDERS EXPLORER (COMPONENT SET · V7)
+   2. FOUNDERS EXPLORER (COMPONENT SET · FIGMA 140:39253)
    ========================================================================== */
 const foundersData = [
   {
@@ -72,13 +72,12 @@ const foundersData = [
     desc: 'Aligning HR with business priorities to enhance organisational capabilities.',
     cutout: '/assets/founder-zulfikar.png',
     statNum: '32+',
-    statLabel: 'years in HR leadership',
+    statLabel: 'years in HR',
     expertise: ['Strategy', 'Hiring and growing people', 'Big changes', 'Managing change'],
     highlights: [
       'Helped BAT and Coats change how their people lead and work',
       'Set up BRAC’s leadership academy to train its managers'
-    ],
-    previously: ['BAT', 'Coats', 'BRAC', 'Grameenphone']
+    ]
   },
   {
     id: 'shahed',
@@ -88,13 +87,12 @@ const foundersData = [
     desc: 'Aligning people strategy, organisational structure and talent management with business priorities.',
     cutout: '/assets/founder-shahed.png',
     statNum: '12',
-    statLabel: 'years in factory and supply chain work at BAT',
+    statLabel: 'years at BAT in factory & supply',
     expertise: ['How teams are set up', 'HR planning', 'Finding senior leaders', 'Employer reputation'],
     highlights: [
       'Led HR for BAT across South Asia',
       'Guided Grameenphone through a major change'
-    ],
-    previously: ['BAT', 'Grameenphone', 'Telenor']
+    ]
   },
   {
     id: 'nowshad',
@@ -109,8 +107,7 @@ const foundersData = [
     highlights: [
       'Led HR when Hello Axiata and Latelz merged to form Smart Axiata',
       'Named a Top 50 HR Leader in Asia (2017)'
-    ],
-    previously: ['Robi Axiata', 'Smart Axiata', 'Airtel']
+    ]
   },
   {
     id: 'khaled',
@@ -120,13 +117,12 @@ const foundersData = [
     desc: 'Improving manufacturing performance through operational and supply chain excellence.',
     cutout: '/assets/founder-khaled.png',
     statNum: '30+',
-    statLabel: 'years in global manufacturing & operations',
+    statLabel: 'years in manufacturing & supply chain',
     expertise: ['Running operations well', 'Efficient factories', 'Buying and suppliers', 'Fixing slow processes'],
     highlights: [
       'Delivered BAT’s largest investment programme in Asia Pacific',
       'Built new factories at BATB and Reckitt Benckiser'
-    ],
-    previously: ['BAT', 'Reckitt', 'British American Tobacco']
+    ]
   }
 ];
 
@@ -141,12 +137,10 @@ function initFoundersExplorer() {
   const statLabelElem = document.getElementById('founder-stat-label');
   const expertiseWrap = document.getElementById('founder-expertise-tags');
   const highlightsWrap = document.getElementById('founder-highlights-list');
-  const badgesWrap = document.getElementById('founder-prev-badges');
 
   if (!tabs.length || !nameElem) return;
 
   function setFounder(data) {
-    // Cutout animation
     if (cutoutElem) {
       cutoutElem.style.opacity = '0';
       cutoutElem.style.transform = 'translateY(12px) scale(0.97)';
@@ -155,7 +149,7 @@ function initFoundersExplorer() {
         cutoutElem.alt = data.name.replace('\n', ' ');
         cutoutElem.style.opacity = '1';
         cutoutElem.style.transform = 'translateY(0) scale(1)';
-      }, 200);
+      }, 150);
     }
 
     if (roleElem) roleElem.textContent = data.roleTag;
@@ -176,25 +170,23 @@ function initFoundersExplorer() {
         .map(h => `<div class="highlight-row"><span class="check">✓</span><span>${h}</span></div>`)
         .join('');
     }
-
-    if (badgesWrap) {
-      badgesWrap.innerHTML = data.previously
-        .map(p => `<span class="prev-badge">${p}</span>`)
-        .join('');
-    }
   }
 
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('is-active'));
+      tabs.forEach(t => {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected', 'false');
+      });
       tab.classList.add('is-active');
+      tab.setAttribute('aria-selected', 'true');
       setFounder(foundersData[index]);
     });
   });
 }
 
 /* ==========================================================================
-   3. SERVICES EXPLORER (COMPONENT SET · V7)
+   3. SERVICES EXPLORER (COMPONENT SET · FIGMA 140:40670)
    ========================================================================== */
 const servicesData = [
   {
@@ -202,15 +194,13 @@ const servicesData = [
     name: 'Strategic Interventions',
     benefit: 'Smoother change, clearer direction',
     desc: 'Help with big decisions and big changes: mergers, new strategies and restructuring.',
-    photo: '/assets/service-hands.jpg',
-    included: ['Strategy formulation', 'Managing big changes', 'Mergers and splits', 'Restructuring teams']
+    included: ['Strategy', 'Managing big changes', 'Mergers and splits', 'Restructuring teams']
   },
   {
     id: 'hr',
     name: 'Human Resources',
     benefit: 'Right people, fair pay, fewer exits',
     desc: 'Better ways to hire, pay, train and keep your people.',
-    photo: '/assets/service-hands.jpg',
     included: ['Hiring and talent', 'Pay and performance', 'Company culture', 'HR policies and rules']
   },
   {
@@ -218,7 +208,6 @@ const servicesData = [
     name: 'Gamified Recruitment',
     benefit: 'Faster shortlists, better candidate experience',
     desc: 'Hire with online games that show how candidates really think and work.',
-    photo: '/assets/featured-service.jpg',
     included: ['Game-based tests', 'Automatic scoring', 'Fit-for-role reports', 'Free trial demo']
   },
   {
@@ -226,7 +215,6 @@ const servicesData = [
     name: 'Manufacturing & Supply Chain',
     benefit: 'More output, less stock, safer sites',
     desc: 'Make more, waste less and keep your operating sites safe and reliable.',
-    photo: '/assets/industry-01.jpg',
     included: ['Factory efficiency', 'Smoother production', 'Buying and suppliers', 'Fixing slow processes']
   },
   {
@@ -234,7 +222,6 @@ const servicesData = [
     name: 'Executive Search',
     benefit: 'Better senior hires',
     desc: 'Finding senior leaders and board members who fit your business and culture.',
-    photo: '/assets/how-we-work.jpg',
     included: ['CEO and top-team search', 'Checking culture fit', 'Future leaders', 'Planning who comes next']
   },
   {
@@ -242,7 +229,6 @@ const servicesData = [
     name: 'Executive Coaching',
     benefit: 'Stronger leaders, lasting results',
     desc: 'One-to-one coaching and mentoring for leaders facing complex decisions.',
-    photo: '/assets/voices-photo.jpg',
     included: ['One-to-one coaching', 'Mentoring programmes', 'Coaching for teams', 'Support on big decisions']
   },
   {
@@ -250,7 +236,6 @@ const servicesData = [
     name: 'Shared Services',
     benefit: 'Lower admin cost, correct payroll',
     desc: 'We run your HR admin, payroll and systems so your internal team can focus on growth.',
-    photo: '/assets/how-we-work.jpg',
     included: ['HR administration', 'Payroll services', 'HR software systems', 'Setting up a service centre']
   }
 ];
@@ -261,7 +246,6 @@ function initServicesExplorer() {
   const titleElem = document.getElementById('service-title');
   const descElem = document.getElementById('service-desc');
   const includedWrap = document.getElementById('service-included-grid');
-  const photoElem = document.getElementById('service-photo');
 
   if (!items.length || !titleElem) return;
 
@@ -269,11 +253,10 @@ function initServicesExplorer() {
     if (benefitElem) benefitElem.textContent = data.benefit;
     if (titleElem) titleElem.textContent = data.name;
     if (descElem) descElem.textContent = data.desc;
-    if (photoElem) photoElem.src = data.photo;
 
     if (includedWrap) {
       includedWrap.innerHTML = data.included
-        .map(inc => `<div class="service-included-item">${inc}</div>`)
+        .map(inc => `<div class="service-included-item"><span class="accent-corner"></span> ${inc}</div>`)
         .join('');
     }
   }
@@ -291,7 +274,7 @@ function initServicesExplorer() {
 }
 
 /* ==========================================================================
-   4. INDUSTRIES EXPLORER (ACCORDION COMPONENT SET · V7)
+   4. INDUSTRIES EXPLORER (ACCORDION COMPONENT SET · FIGMA 140:39255)
    ========================================================================== */
 function initIndustriesAccordion() {
   const strips = document.querySelectorAll('.industry-strip');
@@ -305,7 +288,6 @@ function initIndustriesAccordion() {
     });
 
     strip.addEventListener('mouseenter', () => {
-      // On desktop wider than 992px, enable hover expansion
       if (window.innerWidth > 992) {
         strips.forEach(s => s.classList.remove('is-active'));
         strip.classList.add('is-active');
@@ -315,13 +297,13 @@ function initIndustriesAccordion() {
 }
 
 /* ==========================================================================
-   5. WORKSHOP GALLERY CAROUSEL (COMPONENT SET · V7)
+   5. WORKSHOP GALLERY CAROUSEL (COMPONENT SET · FIGMA 140:39256)
    ========================================================================== */
 const workshopSlides = [
   {
-    num: '01  /  04',
-    tag: 'UCB PLC  ·  HR OVERHAUL',
-    title: 'Collaborating to evaluate roles better.',
+    num: '01 / 04',
+    tag: 'UCB PLC · HR OVERHAUL',
+    title: 'Collaborating to<br />evaluate roles better.',
     desc: 'A one-day workshop for 40 managers on writing job descriptions and judging how big each job is, so UCB can do it on its own.',
     format: 'One day · 40 managers',
     focus: 'Writing and grading job roles',
@@ -331,39 +313,39 @@ const workshopSlides = [
     nextTag: 'NEXT · MARICO BANGLADESH'
   },
   {
-    num: '02  /  04',
-    tag: 'MARICO BANGLADESH  ·  LEADERSHIP',
-    title: 'Growing future leaders.',
+    num: '02 / 04',
+    tag: 'MARICO BANGLADESH · LEADERSHIP',
+    title: 'Growing future<br />leaders.',
     desc: 'A two-day workshop for Marico’s rising leaders, mixing short lessons with hands-on practice.',
     format: 'Two days · 6–7 September',
     focus: 'Everyday leadership skills',
     ledBy: 'Quazi M. Shahed, Saifuddin M. Khaled',
     photoA: '/assets/workshop-02.jpg',
-    photoB: '/assets/workshop-01b.jpg',
+    photoB: '/assets/workshop-04.jpg',
     nextTag: 'NEXT · EDOTCO BANGLADESH'
   },
   {
-    num: '03  /  04',
-    tag: 'EDOTCO BANGLADESH  ·  STRATEGIC LEADERSHIP',
-    title: 'Building strategic leadership.',
+    num: '03 / 04',
+    tag: 'EDOTCO BANGLADESH · STRATEGIC LEADERSHIP',
+    title: 'Building strategic<br />leadership.',
     desc: 'An interactive leadership experience focused on strategic decisions, adaptability and real business challenges.',
     format: 'Interactive leadership simulation',
     focus: 'Strategic decision-making',
     ledBy: 'ZUNOKS × IIM Calcutta',
-    photoA: '/assets/workshop-01.jpg',
-    photoB: '/assets/workshop-04.jpg',
+    photoA: '/assets/workshop-04.jpg',
+    photoB: '/assets/workshop-01b.jpg',
     nextTag: 'NEXT · ROBI'
   },
   {
-    num: '04  /  04',
-    tag: 'ROBI  ·  PEOPLE MANAGER EXCELLENCE',
-    title: 'Helping managers lead better.',
+    num: '04 / 04',
+    tag: 'ROBI · PEOPLE MANAGER EXCELLENCE',
+    title: 'Helping managers<br />lead better.',
     desc: 'Training 105 managers across four batches to strengthen leadership and team management skills.',
     format: '16–31 August · 4 batches',
     focus: '105 people managers',
     ledBy: 'Shahed Quazi and Matiul Nowshad',
-    photoA: '/assets/workshop-04.jpg',
-    photoB: '/assets/workshop-01b.jpg',
+    photoA: '/assets/workshop-01b.jpg',
+    photoB: '/assets/workshop-01.jpg',
     nextTag: 'NEXT · UCB PLC'
   }
 ];
@@ -381,6 +363,7 @@ function initWorkshopCarousel() {
   const ledByElem = document.getElementById('workshop-ledby');
   const photoAElem = document.getElementById('workshop-photo-a');
   const photoBElem = document.getElementById('workshop-photo-b');
+  const nextTagElem = document.getElementById('workshop-next-tag');
 
   if (!prevBtn || !nextBtn || !titleElem) return;
 
@@ -388,11 +371,12 @@ function initWorkshopCarousel() {
     const s = workshopSlides[idx];
     if (counterElem) counterElem.textContent = s.num;
     if (tagElem) tagElem.textContent = s.tag;
-    if (titleElem) titleElem.textContent = s.title;
+    if (titleElem) titleElem.innerHTML = s.title;
     if (descElem) descElem.textContent = s.desc;
     if (formatElem) formatElem.textContent = s.format;
     if (focusElem) focusElem.textContent = s.focus;
     if (ledByElem) ledByElem.textContent = s.ledBy;
+    if (nextTagElem) nextTagElem.textContent = s.nextTag;
 
     if (photoAElem) {
       photoAElem.style.opacity = '0.3';
@@ -402,11 +386,7 @@ function initWorkshopCarousel() {
       }, 150);
     }
     if (photoBElem) {
-      photoBElem.style.opacity = '0.3';
-      setTimeout(() => {
-        photoBElem.src = s.photoB;
-        photoBElem.style.opacity = '1';
-      }, 150);
+      photoBElem.src = s.photoB;
     }
   }
 
@@ -422,13 +402,12 @@ function initWorkshopCarousel() {
 }
 
 /* ==========================================================================
-   6. SWOT TEST DIAGNOSTIC WIDGET (COMPONENT SET · V7)
+   6. SWOT TEST DIAGNOSTIC WIDGET (FIGMA 140:39258)
    ========================================================================== */
 function initSwotDiagnostic() {
   let currentStep = 1;
   let timeLeft = 10;
   let timerInterval = null;
-  const userAnswers = [];
 
   const timerDigit = document.getElementById('swot-countdown-digit');
   const stepLabel = document.getElementById('swot-step-label');
@@ -439,35 +418,32 @@ function initSwotDiagnostic() {
   const quizView = document.getElementById('swot-quiz-step-view');
   const resultView = document.getElementById('swot-result-view');
   const resetBtn = document.getElementById('swot-reset-btn');
-  const timerCaption = document.getElementById('swot-timer-caption');
 
   const questions = [
     {
       step: 1,
       stepText: 'STEP 1 OF 3',
       pct: '33%',
-      question: 'How does your team feel today?',
+      question: 'How does your team<br />feel today?',
       options: ['Skilled and settled', 'Growing fast', 'Stretched thin']
     },
     {
       step: 2,
       stepText: 'STEP 2 OF 3',
       pct: '67%',
-      question: 'What slows you down most?',
+      question: 'What slows you down<br />most?',
       options: ['Finding the right people', 'Unclear roles and decisions', 'Costs and slow processes']
     },
     {
       step: 3,
       stepText: 'STEP 3 OF 3',
       pct: '100%',
-      question: 'What is your top priority for next year?',
+      question: 'What is your top priority<br />for next year?',
       options: ['Accelerating business growth', 'Reorganising leadership & culture', 'Process & factory efficiency']
     }
   ];
 
-  // Animate the 19 SVG segments of the radial gauge
   function updateGaugeSegments(remainingSeconds) {
-    // 19 segments mapped to 10 seconds: ratio = remainingSeconds / 10
     const activeCount = Math.round((remainingSeconds / 10) * 19);
     for (let i = 1; i <= 19; i++) {
       const seg = document.getElementById(`gauge-seg-${i}`);
@@ -498,32 +474,41 @@ function initSwotDiagnostic() {
 
       if (timeLeft <= 0) {
         clearInterval(timerInterval);
-        // Auto pick first option if time runs out
-        handleAnswer(questions[currentStep - 1].options[0]);
+        handleNextStep();
       }
     }, 1000);
   }
 
-  function renderStep(stepIndex) {
-    const q = questions[stepIndex];
+  function renderStep(idx) {
+    if (idx >= questions.length) {
+      clearInterval(timerInterval);
+      if (quizView) quizView.style.display = 'none';
+      if (resultView) resultView.classList.add('is-visible');
+      if (stepLabel) stepLabel.textContent = 'RESULTS READY';
+      if (progressPct) progressPct.textContent = '100%';
+      if (trackFill) trackFill.style.width = '100%';
+      return;
+    }
+
+    const q = questions[idx];
     if (stepLabel) stepLabel.textContent = q.stepText;
     if (progressPct) progressPct.textContent = q.pct;
     if (trackFill) trackFill.style.width = q.pct;
-    if (questionElem) questionElem.textContent = q.question;
+    if (questionElem) questionElem.innerHTML = q.question;
 
     if (optionsWrap) {
       optionsWrap.innerHTML = q.options
-        .map((opt, i) => `
-          <button class="swot-option-btn" data-answer="${opt}">
-            <span>${opt}</span>
-            <span style="color: var(--color-lime); font-size: 18px;">→</span>
-          </button>
-        `)
+        .map(opt => `<button type="button" class="swot-option-btn">${opt}</button>`)
         .join('');
 
-      optionsWrap.querySelectorAll('.swot-option-btn').forEach(btn => {
+      optionsWrap.querySelectorAll('.swot-option-btn').forEach((btn, optIndex) => {
+        if (optIndex === 0) btn.classList.add('is-selected');
         btn.addEventListener('click', () => {
-          handleAnswer(btn.getAttribute('data-answer'));
+          optionsWrap.querySelectorAll('.swot-option-btn').forEach(b => b.classList.remove('is-selected'));
+          btn.classList.add('is-selected');
+          setTimeout(() => {
+            handleNextStep();
+          }, 250);
         });
       });
     }
@@ -531,94 +516,64 @@ function initSwotDiagnostic() {
     startTimer();
   }
 
-  function handleAnswer(answer) {
-    userAnswers.push(answer);
-    if (currentStep < 3) {
-      currentStep++;
-      renderStep(currentStep - 1);
-    } else {
-      showResults();
-    }
-  }
-
-  function showResults() {
-    clearInterval(timerInterval);
-    if (timerDigit) timerDigit.textContent = '✓';
-    if (timerCaption) timerCaption.textContent = 'Completed';
-    updateGaugeSegments(19);
-
-    if (quizView) quizView.style.display = 'none';
-    if (resultView) resultView.classList.add('is-visible');
-
-    // Tailor results based on selections
-    const teamState = userAnswers[0] || 'Skilled and settled';
-    const bottleneck = userAnswers[1] || 'Unclear roles and decisions';
-
-    const sElem = document.getElementById('swot-result-s');
-    const wElem = document.getElementById('swot-result-w');
-    const oElem = document.getElementById('swot-result-o');
-    const tElem = document.getElementById('swot-result-t');
-
-    if (sElem) sElem.textContent = `High core capability: ${teamState}`;
-    if (wElem) wElem.textContent = `Operational friction: ${bottleneck}`;
-    if (oElem) oElem.textContent = 'Structured leadership alignment and capability transformation';
-    if (tElem) tElem.textContent = 'Key talent disengagement if restructuring is delayed';
-  }
-
-  function resetQuiz() {
-    currentStep = 1;
-    userAnswers.length = 0;
-    if (quizView) quizView.style.display = 'flex';
-    if (resultView) resultView.classList.remove('is-visible');
-    if (timerCaption) timerCaption.innerHTML = 'seconds left<br>to answer';
-    renderStep(0);
+  function handleNextStep() {
+    currentStep++;
+    renderStep(currentStep - 1);
   }
 
   if (resetBtn) {
-    resetBtn.addEventListener('click', resetQuiz);
+    resetBtn.addEventListener('click', () => {
+      currentStep = 1;
+      if (quizView) quizView.style.display = 'block';
+      if (resultView) resultView.classList.remove('is-visible');
+      renderStep(0);
+    });
   }
 
-  // Initial step setup
+  // Initial render
   if (quizView && optionsWrap) {
     renderStep(0);
   }
 }
 
 /* ==========================================================================
-   7. COUNT-UP STATS ANIMATIONS
+   7. COUNT-UP ANIMATIONS (STATISTICS)
    ========================================================================== */
 function initCountUpAnimations() {
-  const statElements = document.querySelectorAll('[data-counter-target]');
-  if (!statElements.length) return;
+  const counterItems = document.querySelectorAll('[data-counter-target]');
+  if (!counterItems.length) return;
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.getAttribute('data-counter-target'), 10);
-        const suffix = el.getAttribute('data-counter-suffix') || '';
-        const duration = 1500;
-        const stepTime = 25;
-        const steps = duration / stepTime;
-        const increment = target / steps;
-        let current = 0;
+        const elem = entry.target;
+        const target = parseInt(elem.getAttribute('data-counter-target'), 10);
+        const suffix = elem.getAttribute('data-counter-suffix') || '';
+        const duration = 1600;
+        const start = performance.now();
 
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= target) {
-            el.textContent = `${target}${suffix}`;
-            clearInterval(timer);
+        function animate(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeOutQuad = 1 - (1 - progress) * (1 - progress);
+          const current = Math.floor(easeOutQuad * target);
+
+          elem.textContent = `${current}${suffix}`;
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
           } else {
-            el.textContent = `${Math.floor(current)}${suffix}`;
+            elem.textContent = `${target}${suffix}`;
           }
-        }, stepTime);
+        }
 
-        obs.unobserve(el);
+        requestAnimationFrame(animate);
+        obs.unobserve(elem);
       }
     });
-  }, { threshold: 0.25 });
+  }, { threshold: 0.3 });
 
-  statElements.forEach(el => observer.observe(el));
+  counterItems.forEach(item => observer.observe(item));
 }
 
 /* ==========================================================================
@@ -635,32 +590,22 @@ function initScrollAppear() {
       }
     });
   }, {
-    rootMargin: '100px 0px 100px 0px',
-    threshold: 0.05
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
   });
 
   elements.forEach(el => observer.observe(el));
-
-  // Immediate check for elements already in viewport
-  requestAnimationFrame(() => {
-    elements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 100 && rect.bottom > -100) {
-        el.classList.add('is-visible');
-      }
-    });
-  });
 }
 
 /* ==========================================================================
    9. VIDEO MODAL
    ========================================================================== */
 function initVideoModal() {
-  const modal = document.getElementById('video-modal');
   const trigger = document.getElementById('play-video-trigger');
+  const modal = document.getElementById('video-modal');
   const closeBtn = document.getElementById('modal-close-btn');
 
-  if (!modal || !trigger) return;
+  if (!trigger || !modal) return;
 
   trigger.addEventListener('click', () => {
     modal.classList.add('is-open');
@@ -677,61 +622,37 @@ function initVideoModal() {
       modal.classList.remove('is-open');
     }
   });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-      modal.classList.remove('is-open');
-    }
-  });
 }
 
 /* ==========================================================================
-   10. FORMS & NEWSLETTER HANDLING
+   10. FORMS
    ========================================================================== */
 function initForms() {
-  // Contact Partner Form
-  const contactForm = document.getElementById('partner-contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
+  const partnerForm = document.getElementById('partner-contact-form');
+  const newsletterForm = document.getElementById('newsletter-form');
+  const swotForm = document.getElementById('swot-email-form');
 
-      setTimeout(() => {
-        contactForm.innerHTML = `
-          <div style="padding: 2.5rem; text-align: center; background: rgba(108,190,69,0.15); border: 1px solid var(--color-lime); border-radius: var(--radius-md);">
-            <div style="font-size: 3rem; color: var(--color-lime); margin-bottom: 0.75rem;">✓</div>
-            <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 0.5rem; color: #FFFFFF;">Thank You.</h3>
-            <p style="color: rgba(255,255,255,0.85); font-size: 16px;">A senior partner will review your message and reply within one working day.</p>
-          </div>
-        `;
-      }, 700);
+  if (partnerForm) {
+    partnerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you! A partner from ZUNOKS Consulting will reply within one working day.');
+      partnerForm.reset();
     });
   }
 
-  // Newsletter Form
-  const newsletterForm = document.getElementById('newsletter-form');
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const btn = newsletterForm.querySelector('button');
-      btn.textContent = 'Subscribed ✓';
-      btn.style.backgroundColor = 'var(--color-lime)';
-      btn.disabled = true;
+      alert('Thank you for subscribing to ZUNOKS monthly insights.');
+      newsletterForm.reset();
     });
   }
 
-  // SWOT Email Send Form
-  const swotForm = document.getElementById('swot-email-form');
   if (swotForm) {
     swotForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const btn = swotForm.querySelector('button');
-      btn.textContent = 'Sent to your inbox ✓';
-      btn.style.backgroundColor = 'var(--color-lime)';
-      btn.disabled = true;
+      alert('Your full diagnostic report has been sent to your email.');
+      swotForm.reset();
     });
   }
 }
